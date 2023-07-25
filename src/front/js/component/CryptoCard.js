@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import axios from "axios";
+import { Star } from 'react-bootstrap-icons';
 import "../../styles/card.css";
 
-const CryptoCard = () => {
+const CryptoCard = ({ fav, setFav, handleRemove }) => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
@@ -15,6 +16,14 @@ const CryptoCard = () => {
   if (!cryptoData || cryptoData.length === 0) {
     return null; // Render nothing if cryptoData is empty
   }
+
+  const handleFavorite = (crypto) => {
+		if (fav.includes(crypto.id)) {
+			handleRemove(crypto.id);
+		} else {
+			setFav([...fav, crypto.id]);
+		}
+	}; 
 
   return (
     <div className="card-container">
@@ -30,6 +39,12 @@ const CryptoCard = () => {
               24h Price Change Percentage: {crypto.price_change_percentage_24h}%
             </p>
             <p>Last Updated: {crypto.last_updated}</p>
+            <button
+							className="btn btn-outline-warning me-md-2"
+						  onClick={() => handleFavorite(planet)}						
+						>
+							<Star />
+						</button>
           </div>
         ))}
       </div>

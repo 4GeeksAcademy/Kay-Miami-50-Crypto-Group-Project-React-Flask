@@ -13,25 +13,25 @@ const NewsFeed = () => {
 
   useEffect(() => {
     const url = "https://crypto-news16.p.rapidapi.com/news/coindesk";
+  
     const options = {
-      method: "GET",
       headers: {
         "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
         "X-RapidAPI-Host": "crypto-news16.p.rapidapi.com",
       },
     };
-
+  
     const fetchNews = async () => {
       try {
-        const response = await fetch(url, options);
-        const result = await response.json();
+        const response = await axios.get(url, options);
+        const result = response.data;
         setNews(result);
         console.log(result);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchNews();
   }, []);
 
