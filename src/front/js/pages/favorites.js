@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import axios from "axios";
 import "../../styles/favorite.css";
 
-export const Favorites = ({ fav, handleRemove }) => {
+export const Favorites = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
